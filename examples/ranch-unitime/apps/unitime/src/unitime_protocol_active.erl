@@ -15,7 +15,9 @@ init(Ref, Socket, Transport, _Opts) ->
 loop(Socket, Transport) ->
     receive
         {tcp, Socket, Data} ->
-            Transport:send(Socket, Data),
+            Request = unitime_lib:chomp(Data),
+            Response = unitime_protocol:handle_request(Request),
+            Transport:send(Socket, <<Response/binary, $\n>>),
             ok = Transport:setopts(Socket, [{active, once}]),
             loop(Socket, Transport);
         {tcp_closed, Socket} ->
