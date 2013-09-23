@@ -43,6 +43,4 @@ websocket_terminate(_Reason, _Req, State) ->
     ok.
 
 said(Nick, Msg) ->
-    N = list_to_binary(Nick),
-    M = list_to_binary(Msg),
-    <<N/binary, $\n, M/binary>>.
+    << (list_to_binary(Nick))/binary, $\n, (list_to_binary(Msg))/binary>>.

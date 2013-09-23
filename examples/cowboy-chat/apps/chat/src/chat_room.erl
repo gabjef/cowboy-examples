@@ -60,7 +60,7 @@ handle_call({leave, Nick}, _From, #state{buddies = Buddies} = State) ->
         {_, WS} ->
             NewBuddies = Buddies -- [{Nick, WS}],
             
-            [WS ! {left, Nick} || {_, WS} <- Buddies],
+            [WS ! {left, Nick} || {_, WS} <- NewBuddies],
             {reply, ok, State#state{buddies = NewBuddies}}
     end;
 
