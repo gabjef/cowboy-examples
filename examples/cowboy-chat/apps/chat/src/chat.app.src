@@ -6,6 +6,8 @@
   {applications, [
                   kernel,
                   stdlib,
+                  sasl,
+                  mimetypes,
                   cowboy
                  ]},
   {mod, { chat_app, []}},
